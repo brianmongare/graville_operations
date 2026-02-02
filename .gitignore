@@ -1,4 +1,15 @@
-# Miscellaneous
+/build/
+/.dart_tool/
+/.flutter-plugins
+/flutter_export_environment.sh
+.packages
+.pub-cache/
+/android/.gradle/
+/android/local.properties
+/ios/Pods/
+/ios/.symlinks/
+*.log
+
 *.class
 *.log
 *.pyc
