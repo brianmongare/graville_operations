@@ -22,13 +22,13 @@ class _SignupState extends State<Signup> {
         children: [
           SizedBox.expand(
             child: Image.asset(
-              'assets/images/image copy.png',
+              'assets/images/background/image.png',
               fit: BoxFit.cover,
             ),
           ),
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
               child: Container(color: Colors.black.withOpacity(0)),
             ),
           ),
@@ -39,15 +39,28 @@ class _SignupState extends State<Signup> {
                 children: [
                   SizedBox(height: 30),
                   Image.asset(
-                    'assets/images/image.png',
+                    'assets/images/logo/image.png',
                     height: 50,
                     width: 500,
                   ),
-                  SizedBox(height: 30),
+                  //SizedBox(height: 20),
                   //welcome text
                   Text(
                     'Welcome to Graville Enterprises Limited!',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                  //SizedBox(height: 10),
+                  Text(
+                    'Please enter your details below',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 19,
+                    ),
                   ),
                   //user textfield
                   SizedBox(height: 30),
@@ -253,7 +266,10 @@ class _SignupState extends State<Signup> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Have an account?'),
+                      Text(
+                        'Have an account?',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       Text(
                         ' Sign in',
                         style: TextStyle(
