@@ -4,6 +4,13 @@ import 'package:graville_operations/main.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Stack(children: [Image.asset('assets/image/image/.png')]),
+    );
+  }
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -120,7 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        style:
                         ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
