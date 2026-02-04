@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:graville_operations/main.dart';
+import 'package:graville_operations/screens/signup/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,16 +20,17 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black12,
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 40),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(Icons.person, size: 70, color: Colors.blue),
+
                 const SizedBox(height: 20),
 
                 const Text(
@@ -93,11 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "input password";
+                      return "please enter password";
                     }
 
                     if (value.length < 8) {
-                      return "Password must have a min of 8 characters";
+                      return "Password must have a max of 8 characters";
                     }
 
                     if (!RegExp(r'[A-Z]').hasMatch(value)) {
@@ -113,13 +116,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
 
+                const SizedBox(height: 18),
+
                 SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        style:
                         ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
@@ -136,6 +140,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      " Forgot password?",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ),
                 Row(
                   children: [
                     Expanded(child: Divider()),
@@ -152,31 +166,44 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have an account? "),
-                    Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    TextButton(
+                      onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Signup())),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
+                    )
+
                   ],
                 ),
+
+                const SizedBox(height: 23),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.facebook, color: Colors.blue),
-                      onPressed: () {},
-                    ),
-                    const SizedBox(width: 18),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.g_mobiledata,
-                        color: Colors.blue,
-                        size: 32,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/facebook.png',
+                          height: 40,
+                        ),
                       ),
-                      onPressed: () {},
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/google.png',
+                          height: 40,
+                        ),
+                      ),
                     ),
                   ],
                 ),
