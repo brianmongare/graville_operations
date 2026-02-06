@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graville_operations/screens/login/login_screen.dart';
-import 'package:graville_operations/screens/signup/signup_screen.dart';
 
 void main() {
   runApp(const MyApp());
