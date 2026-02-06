@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graville_operations/main.dart';
+// ignore: depend_on_referenced_packages
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,11 +17,25 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _obscurePassword = true;
+  Widget _socialIcon(IconData icon, Color color) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(30),
+        onTap: () {},
+        child: CircleAvatar(
+          radius: 22,
+          backgroundColor: Colors.grey[200],
+          child: FaIcon(icon, color: color, size: 20),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black26,
+      backgroundColor: Colors.black12,
 
       body: Center(
         child: SingleChildScrollView(
@@ -181,26 +197,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Image.asset(
-                          'assets/images/facebook.png',
-                          height: 40,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Image.asset(
-                          'assets/images/google.png',
-                          height: 40,
-                        ),
-                      ),
-                    ),
+                    _socialIcon(FontAwesomeIcons.google, Colors.red),
+                    _socialIcon(FontAwesomeIcons.linkedinIn, Colors.blueAccent),
+                    _socialIcon(FontAwesomeIcons.facebookF, Colors.blue),
+                    _socialIcon(FontAwesomeIcons.instagram, Colors.purple),
+                    _socialIcon(FontAwesomeIcons.xTwitter, Colors.black),
                   ],
                 ),
               ],
