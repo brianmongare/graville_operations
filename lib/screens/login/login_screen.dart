@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:graville_operations/screens/commons/widgets/custom_text_input.dart';
+import 'package:graville_operations/screens/forgot_password/forgot_password.dart';
+import 'package:graville_operations/screens/signup/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _obscurePassword = true;
+
   Widget _socialIcon(IconData icon, Color color) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -30,6 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  String? passwordErrorMessage;
+  String? emailErrorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -63,75 +69,45 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 26),
 
-                TextFormField(
+                CustomTextInput(
                   controller: emailController,
-                  decoration: InputDecoration(
-                    hintText: "example@gmail.com",
-                    labelText: "Email",
-                    prefixIcon: const Icon(Icons.email),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Email is required";
-                    }
-                    if (!value.contains('@')) {
-                      return "Enter a valid email";
-                    }
-                    return "null";
-                  },
+                  labelText: "Email",
+                  hintText: "example@gmail.com",
+                  prefixIcon: Icons.email,
                 ),
                 const SizedBox(height: 15),
-
-                TextFormField(
+                CustomTextInput(
                   controller: passwordController,
-                  obscureText: _obscurePassword,
-                  maxLength: 8,
-                  decoration: InputDecoration(
-                    hintText: "Enter password",
-                    labelText: "Password",
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "please enter password";
-                    }
-
-                    if (value.length < 8) {
-                      return "Password must have a max of 8 characters";
-                    }
-
-                    if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                      return "Password must have at least one capital letter";
-                    }
-
-                    if (!RegExp(r'[@_$]').hasMatch(value)) {
-                      return "Password must include @, _ or \$";
-                    }
-
-                    return null;
+                  labelText: "Password",
+                  hintText: "at least 8 characters",
+                  prefixIcon: Icons.lock,
+                  suffixIcon: _obscurePassword
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                  isObscure: _obscurePassword,
+                  isPassword: _obscurePassword,
+                  onVisibilityPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
                   },
                 ),
-                const SizedBox(height: 20),
-
-                const SizedBox(height: 18),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotPasswordScreen(),
+                      ),
+                    ),
+                    child: const Text(
+                      " Forgot password?",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
 
                 SizedBox(
                   width: double.infinity,
@@ -140,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          // backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -155,16 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      " Forgot password?",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ),
                 Row(
                   children: [
                     Expanded(child: Divider()),
@@ -176,6 +142,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
 
+                const SizedBox(height: 19),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account? "),
+                    TextButton(
+                      onPressed: () => Navigator.of(
+                        context,
+                      ).push(MaterialPageRoute(builder: (context) => Signup())),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 19),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
