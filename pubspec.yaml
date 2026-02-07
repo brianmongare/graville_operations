@@ -19,10 +19,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-   - assets/images/logo.png
-    - assets/images/resetpassword.png
-    - assets/images/forgotpassword.png
-    - assets/images/otpverification.png
+    - assets/images/
  
   # fonts:
   #   - family: Schyler
