@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:graville_operations/screens/commons/utils.dart';
 import 'package:graville_operations/screens/commons/widgets/custom_text_input.dart';
 import 'package:graville_operations/screens/login/login_screen.dart';
 import 'package:flutter/services.dart';
@@ -64,7 +65,7 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.grey[500],
+      // backgroundColor: Colors.grey[500],
       body: Stack(
         children: [
           SizedBox.expand(
@@ -81,191 +82,174 @@ class _SignupState extends State<Signup> {
           ),
 
           SafeArea(
-            child:SingleChildScrollView(
-                child:  Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
 
+                  children: [
+                    SizedBox(height: 10),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: 50,
+                      width: 500,
+                    ),
+                    //SizedBox(height: 20),
+                    //welcome text
+                    Text(
+                      'Welcome to Graville Enterprises Limited!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                    ),
+                    Text(
+                      'Please enter your details below',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 19,
+                      ),
+                    ),
+                    CustomTextInput(
+                      controller: firstNameController,
+                      labelText: "First Name",
+                      hintText: "John",
+                      prefixIcon: Icons.person,
+                    ),
+                    CustomTextInput(
+                      controller: lastNameController,
+                      labelText: "Last Name",
+                      hintText: "Doe",
+                      prefixIcon: Icons.person,
+                    ),
+
+                    CustomTextInput(
+                      controller: emailController,
+                      labelText: "Email",
+                      hintText: "example@gmail.com",
+                      prefixIcon: Icons.email,
+                    ),
+                    CustomTextInput(
+                      controller: passwordController,
+                      isPassword: !_isPasswordVisible,
+                      isObscure: _isPasswordVisible,
+                      onSuffixIconPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                      labelText: 'Password',
+                      hintText: 'at least 8 characters',
+                      prefixIcon: Icons.lock,
+                      suffixIcon: _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      validator: (value) =>
+                          InputValidation().validatePassword(value),
+                    ),
+                    CustomTextInput(
+                      controller: confirmpasswordController,
+                      isPassword: !_isConfirmpasswordVisible,
+                      isObscure: _isConfirmpasswordVisible,
+                      onSuffixIconPressed: () {
+                        setState(() {
+                          _isConfirmpasswordVisible =
+                              !_isConfirmpasswordVisible;
+                        });
+                      },
+                      labelText: 'Confirm Password',
+                      hintText: 'Password should be equal',
+                      prefixIcon: Icons.lock,
+                      suffixIcon: _isConfirmpasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      validator: (value) {
+
+                      }
+
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          print("Sign up succeful");
+                        }
+                      },
+                      child: Center(
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            'Sign Up',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      '-------------------- OR --------------------',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 10),
-                        Image.asset(
-                          'assets/images/logo.png',
-                          height: 50,
-                          width: 500,
-                        ),
-                        //SizedBox(height: 20),
-                        //welcome text
                         Text(
-                          'Welcome to Graville Enterprises Limited!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                          ),
+                          'Have an account?',
+                          style: TextStyle(color: Colors.white),
                         ),
-                        //SizedBox(height: 10),
-                        Text(
-                          'Please enter your details below',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 19,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextInput(
-                                controller: firstNameController,
-                                labelText: "First Name",
-                                hintText: "John",
-                                prefixIcon: Icons.person,
-                              ),
-                            ),
-                            SizedBox(width: 8,),
-                            Expanded(
-                              child: CustomTextInput(
-                                controller: firstNameController,
-                                labelText: "Last Name",
-                                hintText: "Doe",
-                                prefixIcon: Icons.person,
-                              ),
-                            ),
-                          ],
-                        ),
-                        //Email
-                        SizedBox(height: 20),
-
-                        CustomTextInput(
-                          controller: emailController,
-                          labelText: "Email",
-                          hintText: "example@gmail.com",
-                          prefixIcon: Icons.email,
-                        ),
-                        //password textfield
-                        SizedBox(height: 20),
-                        CustomTextInput(
-                          controller: passwordController,
-                          isPassword: !_isPasswordVisible,
-                          isObscure: _isPasswordVisible,
-                          onVisibilityPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          },
-                          labelText: 'Password',
-                          hintText: 'at least 8 characters',
-                          prefixIcon: Icons.lock,
-                          suffixIcon: _isPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-
-                        SizedBox(height: 20),
-                        CustomTextInput(
-                          controller: confirmpasswordController,
-                          isPassword: !_isConfirmpasswordVisible,
-                          isObscure: _isConfirmpasswordVisible,
-                          onVisibilityPressed: () {
-                            setState(() {
-                              _isConfirmpasswordVisible =
-                                  !_isConfirmpasswordVisible;
-                            });
-                          },
-                          labelText: 'Confirm Password',
-                          hintText: 'Password should be equal',
-                          prefixIcon: Icons.lock,
-                          suffixIcon: _isConfirmpasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-
-                        //signup button
-                        SizedBox(height: 20),
-                        GestureDetector(
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              print("Sign up succeful");
-                            }
-                          },
-                          child: Center(
-                            child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: Text(
-                                'Sign Up',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 20),
-                        Text(
-                          '-------------------- OR --------------------',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                          child: Text(
+                            ' Sign in',
+                            style: TextStyle(
+                              color: Colors.blue[500],
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Have an account?',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => LoginScreen(),
-                                ),
-                              ),
-                              child: Text(
-                                ' Sign in',
-                                style: TextStyle(
-                                  color: Colors.blue[500],
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _socialIcon(FontAwesomeIcons.google, Colors.red),
-                            _socialIcon(
-                              FontAwesomeIcons.linkedinIn,
-                              Colors.blueAccent,
-                            ),
-                            _socialIcon(FontAwesomeIcons.facebookF, Colors.blue),
-                            _socialIcon(
-                              FontAwesomeIcons.instagram,
-                              Colors.purple,
-                            ),
-                            _socialIcon(FontAwesomeIcons.xTwitter, Colors.black),
-                          ],
                         ),
                       ],
                     ),
-                ),
+
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _socialIcon(FontAwesomeIcons.google, Colors.red),
+                        _socialIcon(
+                          FontAwesomeIcons.linkedinIn,
+                          Colors.blueAccent,
+                        ),
+                        _socialIcon(FontAwesomeIcons.facebookF, Colors.blue),
+                        _socialIcon(FontAwesomeIcons.instagram, Colors.purple),
+                        _socialIcon(FontAwesomeIcons.xTwitter, Colors.black),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-
+            ),
+          ),
         ],
       ),
     );
