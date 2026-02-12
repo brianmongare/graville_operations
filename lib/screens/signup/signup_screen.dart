@@ -127,7 +127,7 @@ class _SignupState extends State<Signup> {
                             controller: firstNameController,
                             labelText: "First Name",
                             hintText: "John",
-                            prefixIcon: Icons.person,
+                            prefixIcon: Icons.person, onSuffixIconPressed: () {  },
                           ),
                         ),
                         SizedBox(width: 8),
@@ -136,7 +136,7 @@ class _SignupState extends State<Signup> {
                             controller: firstNameController,
                             labelText: "Last Name",
                             hintText: "Doe",
-                            prefixIcon: Icons.person,
+                            prefixIcon: Icons.person, onSuffixIconPressed: () {  },
                           ),
                         ),
                       ],
@@ -148,7 +148,7 @@ class _SignupState extends State<Signup> {
                       controller: emailController,
                       labelText: "Email",
                       hintText: "example@gmail.com",
-                      prefixIcon: Icons.email,
+                      prefixIcon: Icons.email, onSuffixIconPressed: () {  },
                     ),
                     //password textfield
                     SizedBox(height: 20),
@@ -166,7 +166,7 @@ class _SignupState extends State<Signup> {
                       prefixIcon: Icons.lock,
                       suffixIcon: _isPasswordVisible
                           ? Icons.visibility
-                          : Icons.visibility_off,
+                          : Icons.visibility_off, onSuffixIconPressed: () {  },
                     ),
 
                     SizedBox(height: 20),
@@ -185,7 +185,7 @@ class _SignupState extends State<Signup> {
                       prefixIcon: Icons.lock,
                       suffixIcon: _isConfirmpasswordVisible
                           ? Icons.visibility
-                          : Icons.visibility_off,
+                          : Icons.visibility_off, onSuffixIconPressed: () {  },
                     ),
 
                     //signup button
