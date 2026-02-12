@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graville_operations/screens/support/support_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -48,7 +49,7 @@ class AccountScreen extends StatelessWidget {
 final List<_AccountItem> _accountItems = [
   _AccountItem(icon: Icons.person, title: 'Profile'),
   _AccountItem(icon: Icons.settings, title: 'Settings'),
-  _AccountItem(icon: Icons.support_agent, title: 'Contact Support'),
+  _AccountItem(icon: Icons.support_agent, title: 'Contact Support',destination: SupportScreen()),
   _AccountItem(icon: Icons.description, title: 'Terms & Policies'),
   _AccountItem(icon: Icons.language, title: 'Visit Our Website'),
 ];
@@ -104,8 +105,8 @@ class _ProfileCard extends StatelessWidget {
 class _AccountItem {
   final IconData icon;
   final String title;
-
-  const _AccountItem({required this.icon, required this.title});
+  final Widget? destination;
+  const _AccountItem({required this.icon, required this.title,this.destination});
 }
 
 class _AccountItemTile extends StatelessWidget {
@@ -122,7 +123,9 @@ class _AccountItemTile extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            debugPrint('${item.title} tapped');
+            if(item.destination!=null){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>item.destination!));
+            }
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
