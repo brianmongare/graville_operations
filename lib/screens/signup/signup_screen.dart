@@ -127,7 +127,7 @@ class _SignupState extends State<Signup> {
                             controller: firstNameController,
                             labelText: "First Name",
                             hintText: "John",
-                            prefixIcon: Icons.person,
+                            prefixIcon: Icons.person, onSuffixIconPressed: () {  },
                           ),
                         ),
                         SizedBox(width: 8),
@@ -136,7 +136,7 @@ class _SignupState extends State<Signup> {
                             controller: firstNameController,
                             labelText: "Last Name",
                             hintText: "Doe",
-                            prefixIcon: Icons.person,
+                            prefixIcon: Icons.person, onSuffixIconPressed: () {  },
                           ),
                         ),
                       ],
@@ -148,7 +148,7 @@ class _SignupState extends State<Signup> {
                       controller: emailController,
                       labelText: "Email",
                       hintText: "example@gmail.com",
-                      prefixIcon: Icons.email,
+                      prefixIcon: Icons.email, onSuffixIconPressed: () {  },
                     ),
                     //password textfield
                     SizedBox(height: 20),
@@ -156,7 +156,7 @@ class _SignupState extends State<Signup> {
                       controller: passwordController,
                       isPassword: _isPasswordVisible,
                       isObscure: !_isPasswordVisible,
-                      onVisibilityPressed: () {
+                      onSuffixIconPressed: () {
                         setState(() {
                           _isPasswordVisible = !_isPasswordVisible;
                         });
@@ -174,7 +174,7 @@ class _SignupState extends State<Signup> {
                       controller: confirmpasswordController,
                       isPassword: _isConfirmpasswordVisible,
                       isObscure: !_isConfirmpasswordVisible,
-                      onVisibilityPressed: () {
+                      onSuffixIconPressed: () {
                         setState(() {
                           _isConfirmpasswordVisible =
                               !_isConfirmpasswordVisible;
