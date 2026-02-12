@@ -6,8 +6,6 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = _accountItems;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account'),
@@ -31,10 +29,10 @@ class AccountScreen extends StatelessWidget {
             Card(
               child: Column(
                 children: List.generate(
-                  items.length,
+                  accountItems.length,
                   (index) => _AccountItemTile(
-                    item: items[index],
-                    showDivider: index != items.length - 1,
+                    item: accountItems[index],
+                    showDivider: index != accountItems.length - 1,
                   ),
                 ),
               ),
@@ -110,7 +108,7 @@ class _AccountItem {
 }
 
 class _AccountItemTile extends StatelessWidget {
-  final _AccountItem item;
+  final AccountItem item;
   final bool showDivider;
 
   const _AccountItemTile({required this.item, required this.showDivider});
