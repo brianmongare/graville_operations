@@ -29,10 +29,10 @@ class AccountScreen extends StatelessWidget {
             Card(
               child: Column(
                 children: List.generate(
-                  accountItems.length,
+                  _accountItems.length,
                   (index) => _AccountItemTile(
-                    item: accountItems[index],
-                    showDivider: index != accountItems.length - 1,
+                    item: _accountItems[index],
+                    showDivider: index != _accountItems.length - 1,
                   ),
                 ),
               ),
@@ -108,7 +108,7 @@ class _AccountItem {
 }
 
 class _AccountItemTile extends StatelessWidget {
-  final AccountItem item;
+  final _AccountItem item;
   final bool showDivider;
 
   const _AccountItemTile({required this.item, required this.showDivider});
