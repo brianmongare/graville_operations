@@ -5,12 +5,15 @@ import 'package:graville_operations/screens/commons/widgets/section_Title.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
+<<<<<<< Updated upstream
   //void _onItemTap(BuildContext context, String title) {
   //ScaffoldMessenger.of(
   //context,
   //).showSnackBar(SnackBar(content: Text('$title clicked')));
   // }
 
+=======
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +39,17 @@ class SettingsScreen extends StatelessWidget {
             //Account section
             const SectionTitle(title: 'Account'),
             _settingsCard(
-              context,
-              items: [
-                _item(Icons.person_outline, 'Edit profile'),
-                _item(Icons.security, 'Security'),
-                _item(Icons.notifications_none, 'Notifications'),
-                _item(Icons.lock_outline, 'Privacy'),
+              items: const [
+                _SettingsItem(
+                  icon: Icons.person_outline,
+                  title: 'Edit profile',
+                ),
+                _SettingsItem(icon: Icons.security, title: 'Security'),
+                _SettingsItem(
+                  icon: Icons.notifications_none,
+                  title: 'Notifications',
+                ),
+                _SettingsItem(icon: Icons.lock_outline, title: 'Privacy'),
               ],
             ),
 
@@ -49,10 +57,9 @@ class SettingsScreen extends StatelessWidget {
 
             const SectionTitle(title: 'Preferences'),
             _settingsCard(
-              context,
-              items: [
-                _item(Icons.language, 'Language'),
-                _item(Icons.dark_mode_outlined, 'Theme'),
+              items: const [
+                _SettingsItem(icon: Icons.language, title: 'Language'),
+                _SettingsItem(icon: Icons.dark_mode_outlined, title: 'Theme'),
               ],
             ),
 
@@ -60,10 +67,15 @@ class SettingsScreen extends StatelessWidget {
 
             const SectionTitle(title: 'Support & About'),
             _settingsCard(
-              context,
-              items: [
-                _item(Icons.help_outline, 'Help & Support'),
-                _item(Icons.info_outline, 'Terms and Policies'),
+              items: const [
+                _SettingsItem(
+                  icon: Icons.help_outline,
+                  title: 'Help & Support',
+                ),
+                _SettingsItem(
+                  icon: Icons.info_outline,
+                  title: 'Terms and Policies',
+                ),
               ],
             ),
 
@@ -71,11 +83,13 @@ class SettingsScreen extends StatelessWidget {
 
             const SectionTitle(title: 'Actions'),
             _settingsCard(
-              context,
-              items: [
-                _item(Icons.flag_outlined, 'Report a problem'),
-                _item(Icons.person_add_alt, 'Add account'),
-                _item(Icons.logout, 'Log out'),
+              items: const [
+                _SettingsItem(
+                  icon: Icons.flag_outlined,
+                  title: 'Report a problem',
+                ),
+                _SettingsItem(icon: Icons.person_add_alt, title: 'Add account'),
+                _SettingsItem(icon: Icons.logout, title: 'Log out'),
               ],
             ),
           ],
@@ -98,10 +112,14 @@ class SettingsScreen extends StatelessWidget {
   //);
   //}
 
+<<<<<<< Updated upstream
   Widget _settingsCard(
     BuildContext context, {
     required List<SettingsItem> items,
   }) {
+=======
+  Widget _settingsCard({required List<_SettingsItem> items}) {
+>>>>>>> Stashed changes
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -109,6 +127,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       child: Column(
         children: items.map((item) {
+<<<<<<< Updated upstream
           //return ListTile(
           // leading: Icon(item.icon, color: Colors.black54),
           //title: Text(
@@ -128,6 +147,14 @@ class SettingsScreen extends StatelessWidget {
               onTap: () {
                 // TODO: navigate or handle action
               },
+=======
+          return Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.black.withOpacity(0.08),
+              highlightColor: Colors.black.withOpacity(0.05),
+              onTap: () {},
+>>>>>>> Stashed changes
               child: ListTile(
                 leading: Icon(item.icon, color: Colors.black54),
                 title: Text(
@@ -145,8 +172,19 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+<<<<<<< Updated upstream
 
   SettingsItem _item(IconData icon, String title) {
     return SettingsItem(icon: icon, title: title);
   }
 }
+=======
+}
+
+class _SettingsItem {
+  final IconData icon;
+  final String title;
+
+  const _SettingsItem({required this.icon, required this.title});
+}
+>>>>>>> Stashed changes
