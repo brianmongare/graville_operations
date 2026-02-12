@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:graville_operations/screens/forgot_password/otp_verification_screen.dart';
 import 'package:graville_operations/screens/commons/assets/images.dart';
-//import 'package:graville_operations/screens/forgot_password/otp_verification_screen.dart';
 import 'package:graville_operations/screens/commons/widgets/custom_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -51,76 +50,80 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 40),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 40),
 
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(shape: BoxShape.circle),
-                  child: Image.asset(
-                    CommonImages.forgotpassword,
-                    fit: BoxFit.cover,
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child: Image.asset(
+                      CommonImages.forgotpassword,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
 
-                Text(
-                  'Forgot Password',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
+                  const SizedBox(height: 20),
+
+                  Text(
+                    'Forgot Password',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
-                Text(
-                  'Enter your email to receive a one-time password (OTP).',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodyMedium,
-                ),
-
-                const SizedBox(height: 30),
-
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email Address',
-                    hintText: 'example@gmail.com',
-                    prefixIcon: Icon(Icons.email),
+                  Text(
+                    'Enter your email to receive a one-time password (OTP).',
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium,
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email is required';
-                    }
 
-                    final emailRegex = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                    );
+                  const SizedBox(height: 30),
 
-                    if (!emailRegex.hasMatch(value)) {
-                      return 'Enter a valid email';
-                    }
-                    return null;
-                  },
-                ),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Email Address',
+                      hintText: 'example@gmail.com',
+                      prefixIcon: Icon(Icons.email),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email is required';
+                      }
 
-                const SizedBox(height: 30),
+                      final emailRegex = RegExp(
+                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                      );
 
-                CustomButton(
-                  label: "Send OTP",
-                  //backgroundColor: Colors.green,
-                  textColor: Colors.black,
-                  onPressed: _sendOtp,
-                ),
-              ],
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'Enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  CustomButton(
+                    label: 'Send OTP',
+                    textColor: Colors.black,
+                    onPressed: _sendOtp,
+                  ),
+
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),

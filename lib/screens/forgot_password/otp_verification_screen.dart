@@ -120,7 +120,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox.expand(
+                Container(
+                  height: 50,
+                  width: 50,
                   child: Image.asset(
                     CommonImages.otpverification,
                     fit: BoxFit.cover,
@@ -128,6 +130,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
 
                 const SizedBox(height: 20),
+
+                Text(
+                  'OTP Verification',
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
 
                 Text(
                   'OTP Verification',
@@ -171,9 +180,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
                 CustomButton(
                   label: "Verify OTP",
-                  //backgroundColor: Colors.green,
+                  backgroundColor: Colors.green,
                   textColor: Colors.black,
                   onPressed: _verifyOtp,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _verifyOtp,
+                    child: const Text('Verify OTP'),
+                  ),
                 ),
 
                 const SizedBox(height: 12),
@@ -183,6 +199,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   //backgroundColor: Colors.green,
                   textColor: Colors.black,
                   onPressed: _resendOtp,
+                ),
+
+                TextButton(
+                  onPressed: _isExpired ? _resendOtp : null,
+                  child: const Text('Resend OTP'),
                 ),
               ],
             ),

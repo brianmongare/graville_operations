@@ -67,6 +67,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                 ),
 
+                Image.asset(
+                  'assets/images/resetpassword.png',
+                  height: 120,
+                  fit: BoxFit.contain,
+                ),
+
+                const SizedBox(height: 20),
+
+                Text(
+                  'Create New Password',
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 8),
 
                 Text(
@@ -146,6 +160,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   backgroundColor: Colors.green,
                   textColor: Colors.black,
                   onPressed: _resetPassword,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _resetPassword,
+                    child: const Text('Reset Password'),
+                  ),
                 ),
               ],
             ),

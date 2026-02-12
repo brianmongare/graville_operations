@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:graville_operations/screens/settings_screen/settings_screen.dart';
-//import 'package:graville_operations/screens/support/support_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -30,10 +28,10 @@ class AccountScreen extends StatelessWidget {
             Card(
               child: Column(
                 children: List.generate(
-                  _accountItems.length,
+                  accountItems.length,
                   (index) => _AccountItemTile(
-                    item: _accountItems[index],
-                    showDivider: index != _accountItems.length - 1,
+                    item: accountItems[index],
+                    showDivider: index != accountItems.length - 1,
                   ),
                 ),
               ),
@@ -45,20 +43,24 @@ class AccountScreen extends StatelessWidget {
   }
 }
 
-final List<_AccountItem> _accountItems = [
-  const _AccountItem(icon: Icons.person, title: 'Profile'),
-  const _AccountItem(
-    icon: Icons.settings,
-    title: 'Settings',
-    destination: null,
-  ),
-  const _AccountItem(
-    icon: Icons.support_agent,
-    title: 'Contact Support',
-    destination: null,
-  ),
-  const _AccountItem(icon: Icons.description, title: 'Terms & Policies'),
-  const _AccountItem(icon: Icons.language, title: 'Visit Our Website'),
+class AccountItem {
+  final IconData icon;
+  final String title;
+  final Widget? destination;
+
+  const AccountItem({
+    required this.icon,
+    required this.title,
+    this.destination,
+  });
+}
+
+final List<AccountItem> accountItems = [
+  const AccountItem(icon: Icons.person, title: 'Profile'),
+  const AccountItem(icon: Icons.settings, title: 'Settings'),
+  const AccountItem(icon: Icons.support_agent, title: 'Contact Support'),
+  const AccountItem(icon: Icons.description, title: 'Terms & Policies'),
+  const AccountItem(icon: Icons.language, title: 'Visit Our Website'),
 ];
 
 class _ProfileCard extends StatelessWidget {
@@ -109,20 +111,8 @@ class _ProfileCard extends StatelessWidget {
   }
 }
 
-class _AccountItem {
-  final IconData icon;
-  final String title;
-  final Widget? destination;
-
-  const _AccountItem({
-    required this.icon,
-    required this.title,
-    this.destination,
-  });
-}
-
 class _AccountItemTile extends StatelessWidget {
-  final _AccountItem item;
+  final AccountItem item;
   final bool showDivider;
 
   const _AccountItemTile({required this.item, required this.showDivider});
@@ -133,30 +123,29 @@ class _AccountItemTile extends StatelessWidget {
 
     return Column(
       children: [
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {
-              if (item.destination != null) {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => item.destination!));
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              child: Row(
-                children: [
-                  Icon(item.icon, size: 22),
-                  const SizedBox(width: 16),
-                  Text(
-                    item.title,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+        InkWell(
+          onTap: () {
+            if (item.destination != null) {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => item.destination!));
+            } else {
+              debugPrint('${item.title} tapped');
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Icon(item.icon, size: 22),
+                const SizedBox(width: 16),
+                Text(
+                  item.title,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
