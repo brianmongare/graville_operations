@@ -155,35 +155,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-<<<<<<< HEAD
+
                     CustomButton(
                       label: "Login",
                       backgroundColor: Colors.grey,
                       textColor: Colors.black,
                       onPressed: signUpUser,
-=======
-
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        );
-                      }
-                      Navigator.of(
-                        context,
-                      ).push(MaterialPageRoute(builder: (context) => MainNavigationScreen()));
-                    },
-                    child: const Text(
-                      "Log In",
-                      style: TextStyle(fontSize: 22),
-                      selectionColor: Color.fromRGBO(47, 33, 243, 1),
->>>>>>> b182a356854f9a40e691542cd9e5e5f0036ad983
                     ),
                 const SizedBox(height: 20),
                 Row(
