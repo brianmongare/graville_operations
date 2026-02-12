@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:graville_operations/navigation/navigation.dart' show MainNavigationScreen;
 import 'package:graville_operations/screens/commons/widgets/custom_text_input.dart';
 import 'package:graville_operations/screens/forgot_password/forgot_password.dart';
+import 'package:graville_operations/screens/home/home_screen.dart';
 import 'package:graville_operations/screens/signup/signup_screen.dart';
 import 'package:graville_operations/screens/commons/widgets/custom_button.dart';
 
@@ -121,7 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "example@gmail.com",
                   prefixIcon: Icons.email,
                 ),
-                const SizedBox(height: 15),
                 CustomTextInput(
                   controller: passwordController,
                   labelText: "Password",
@@ -132,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       : Icons.visibility,
                   isObscure: _obscurePassword,
                   isPassword: _obscurePassword,
-                  onVisibilityPressed: () {
+                  onSuffixIconPressed: () {
                     setState(() {
                       _obscurePassword = !_obscurePassword;
                     });
@@ -154,11 +155,35 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
+<<<<<<< HEAD
                     CustomButton(
                       label: "Login",
                       backgroundColor: Colors.grey,
                       textColor: Colors.black,
                       onPressed: signUpUser,
+=======
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        );
+                      }
+                      Navigator.of(
+                        context,
+                      ).push(MaterialPageRoute(builder: (context) => MainNavigationScreen()));
+                    },
+                    child: const Text(
+                      "Log In",
+                      style: TextStyle(fontSize: 22),
+                      selectionColor: Color.fromRGBO(47, 33, 243, 1),
+>>>>>>> b182a356854f9a40e691542cd9e5e5f0036ad983
                     ),
                 const SizedBox(height: 20),
                 Row(
