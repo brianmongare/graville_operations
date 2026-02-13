@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const SettingsScreen(),
+      home: const LoginScreen(),
 
 
     );
