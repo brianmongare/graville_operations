@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Please enter your credentials',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.blueGrey,
+                        color: Colors.black,
                         fontSize: 18,
                       ),
                     ),
@@ -147,8 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                  ),
                 const SizedBox(height: 8),
                 CustomButton(label: "log in", 
-              backgroundColor: Colors.green,
-                      textColor: Colors.black,
+              backgroundColor: Colors.white,
+                      textColor: Colors.blue,
                     onPressed: () => Navigator(),
                 ),
 
