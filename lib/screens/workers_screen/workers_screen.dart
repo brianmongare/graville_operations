@@ -1,7 +1,31 @@
 import 'package:flutter/material.dart';
 
-class WorkersScreen extends StatelessWidget {
+class WorkersScreen extends StatefulWidget {
   const WorkersScreen({super.key});
+
+  @override
+  State<WorkersScreen> createState() => _WorkersScreenState();
+}
+
+class _WorkersScreenState extends State<WorkersScreen> {
+  String? selectedSite;
+
+  final List<String> sites = [
+    'Mabatini',
+    'Mishi Mboko',
+    'Huruma',
+    'DCC Kibra',
+    'Ngei',
+    'Iremele',
+  ];
+
+  final List<List<String>> workers = [
+    ["John Mitchell", "W001", "Skilled", "+1 555-0123", "Brickwork", "\$250"],
+    ["Robert Chen", "W002", "Skilled", "+1 555-0124", "Carpentry", "\$280"],
+    ["Maria Garcia", "W003", "Skilled", "+1 555-0125", "Electrical", "\$300"],
+    ["David Thompson", "W004", "Skilled", "+1 555-0126", "Plumbing", "\$275"],
+    ["Sarah Williams", "W005", "Unskilled", "+1 555-0127", "Labor", "\$150"],
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,40 +53,40 @@ class WorkersScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// SELECT SITE CARD
+            /// SELECT SITE
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Select Site",
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                child: DropdownButtonFormField<String>(
+                  value: selectedSite,
+                  hint: const Text("Select Site"),
+                  items: sites
+                      .map(
+                        (site) =>
+                            DropdownMenuItem(value: site, child: Text(site)),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() => selectedSite = value);
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
                     ),
-                    const SizedBox(height: 10),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "Choose site...",
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
 
             const SizedBox(height: 16),
 
-            /// STATS CARDS
+            /// STATS
             Row(
               children: [
                 Expanded(
@@ -71,9 +95,7 @@ class WorkersScreen extends StatelessWidget {
                     subtitle: "Total Workers Assigned",
                     color: Colors.blue.shade100,
                     textColor: Colors.blue,
-                    onTap: () {
-                      print("Total Workers Clicked");
-                    },
+                    onTap: () => debugPrint("Total Workers"),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -83,9 +105,7 @@ class WorkersScreen extends StatelessWidget {
                     subtitle: "Workers Present Today",
                     color: Colors.orange.shade100,
                     textColor: Colors.orange,
-                    onTap: () {
-                      print("Present Workers Clicked");
-                    },
+                    onTap: () => debugPrint("Present Workers"),
                   ),
                 ),
               ],
@@ -93,89 +113,92 @@ class WorkersScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            /// ADD WORKER BUTTON + SEARCH
+            /// ADD WORKER (DISABLED) + SEARCH
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    print("Add Worker Clicked");
-                  },
+                  onPressed: null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    disabledBackgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
                   ),
                   child: const Text("Add Worker"),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Search",
-                      prefixIcon: const Icon(Icons.search),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                const Spacer(),
+                TextButton.icon(
+                  onPressed: () {
+                    debugPrint("Search clicked");
+                  },
+                  icon: const Icon(Icons.search),
+                  label: const Text("Search"),
                 ),
               ],
             ),
 
             const SizedBox(height: 16),
 
-            /// WORKER LIST CARD
+            /// WORKER TABLE
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Worker List",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    showCheckboxColumn: false, // ✅ removes checkbox icons
+                    headingRowColor: MaterialStateProperty.all(
+                      Colors.grey.shade200,
                     ),
-                    const SizedBox(height: 12),
-
-                    /// HORIZONTAL SCROLL TABLE
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                        columnSpacing: 30,
-                        columns: const [
-                          DataColumn(label: Text("NAME")),
-                          DataColumn(label: Text("ID")),
-                          DataColumn(label: Text("TYPE")),
-                          DataColumn(label: Text("PHONE NO.")),
-                          DataColumn(label: Text("TASK")),
-                          DataColumn(label: Text("AMOUNT")),
-                        ],
-                        rows: _buildRows(),
-                      ),
-                    ),
-                  ],
+                    columnSpacing: 30,
+                    columns: _buildHeaderColumns(),
+                    rows: _buildWorkerRows(),
+                  ),
                 ),
               ),
             ),
-
-            const SizedBox(height: 30), // ensures bottom visibility
           ],
         ),
       ),
     );
   }
 
-  /// STAT CARD WIDGET
+  /// CLICKABLE HEADER COLUMNS
+  List<DataColumn> _buildHeaderColumns() {
+    final headers = ["NAME", "ID", "TYPE", "PHONE NO", "TASK", "AMOUNT"];
+
+    return headers.map((title) {
+      return DataColumn(
+        label: GestureDetector(
+          onTap: () => debugPrint("Header clicked: $title"),
+          child: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  /// CLICKABLE DATA CELLS (NO ROW CLICK)
+  List<DataRow> _buildWorkerRows() {
+    return workers.map((worker) {
+      return DataRow(
+        cells: worker.map((cell) {
+          return DataCell(
+            Text(cell),
+            onTap: () {
+              debugPrint("Cell clicked: $cell");
+            },
+          );
+        }).toList(),
+      );
+    }).toList();
+  }
+
+  /// STAT CARD
   Widget _statCard({
     required String title,
     required String subtitle,
@@ -183,8 +206,9 @@ class WorkersScreen extends StatelessWidget {
     required Color textColor,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -211,30 +235,5 @@ class WorkersScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// TABLE ROWS
-  List<DataRow> _buildRows() {
-    final workers = [
-      ["John Mitchell", "W001", "Skilled", "+1 555-0123", "Brickwork", "\$250"],
-      ["Robert Chen", "W002", "Skilled", "+1 555-0124", "Carpentry", "\$280"],
-      ["Maria Garcia", "W003", "Skilled", "+1 555-0125", "Electrical", "\$300"],
-      ["David Thompson", "W004", "Skilled", "+1 555-0126", "Plumbing", "\$275"],
-      ["Sarah Williams", "W005", "Unskilled", "+1 555-0127", "Labor", "\$150"],
-      ["James Anderson", "W006", "Skilled", "+1 555-0128", "Woodwork", "\$260"],
-      ["Lisa Brown", "W007", "Skilled", "+1 555-0129", "Supervision", "\$350"],
-      ["Michael Davis", "W008", "Skilled", "+1 555-0130", "Welding", "\$290"],
-    ];
-
-    return workers
-        .map(
-          (worker) => DataRow(
-            cells: worker.map((cell) => DataCell(Text(cell))).toList(),
-            onSelectChanged: (value) {
-              print("Clicked: ${worker[0]}");
-            },
-          ),
-        )
-        .toList();
   }
 }
