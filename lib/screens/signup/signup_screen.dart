@@ -156,7 +156,7 @@ class _SignupState extends State<Signup> {
                       controller: passwordController,
                       isPassword: _isPasswordVisible,
                       isObscure: !_isPasswordVisible,
-                      onVisibilityPressed: () {
+                      onSuffixIconPressed: () {
                         setState(() {
                           _isPasswordVisible = !_isPasswordVisible;
                         });
@@ -166,7 +166,7 @@ class _SignupState extends State<Signup> {
                       prefixIcon: Icons.lock,
                       suffixIcon: _isPasswordVisible
                           ? Icons.visibility
-                          : Icons.visibility_off, onSuffixIconPressed: () {  },
+                          : Icons.visibility_off,
                     ),
 
                     SizedBox(height: 20),
@@ -174,7 +174,7 @@ class _SignupState extends State<Signup> {
                       controller: confirmpasswordController,
                       isPassword: _isConfirmpasswordVisible,
                       isObscure: !_isConfirmpasswordVisible,
-                      onVisibilityPressed: () {
+                      onSuffixIconPressed: () {
                         setState(() {
                           _isConfirmpasswordVisible =
                               !_isConfirmpasswordVisible;
@@ -185,7 +185,7 @@ class _SignupState extends State<Signup> {
                       prefixIcon: Icons.lock,
                       suffixIcon: _isConfirmpasswordVisible
                           ? Icons.visibility
-                          : Icons.visibility_off, onSuffixIconPressed: () {  },
+                          : Icons.visibility_off,
                     ),
 
                     //signup button

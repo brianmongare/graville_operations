@@ -113,7 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "example@gmail.com",
                   prefixIcon: Icons.email, onSuffixIconPressed: () {  },
                 ),
-                const SizedBox(height: 15),
                 CustomTextInput(
                   controller: passwordController,
                   labelText: "Password",
@@ -124,11 +123,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       : Icons.visibility,
                   isObscure: _obscurePassword,
                   isPassword: _obscurePassword,
-                  onVisibilityPressed: () {
+                  onSuffixIconPressed: () {
                     setState(() {
                       _obscurePassword = !_obscurePassword;
                     });
-                  }, onSuffixIconPressed: () {  },
+                  },
                 ),
     
                 Align(
