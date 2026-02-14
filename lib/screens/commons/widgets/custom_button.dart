@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  
   final String label;
   final VoidCallback onPressed;
   final bool isLoading;
@@ -12,7 +11,7 @@ class CustomButton extends StatelessWidget {
   final Widget? icon;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     this.isLoading = false,
@@ -21,11 +20,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.borderRadius,
     this.icon,
-  }) : super(key: key);
-  
-  String? get text => null;
-
-
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64,5 +59,3 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
-
-  
