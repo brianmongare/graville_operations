@@ -35,19 +35,25 @@ class _LoginScreenState extends State<LoginScreen> {
         color: color,
         size: 20,
       ),
-
-
     ),
   );
-  }
-    void signUpUser() {
-    if (_formKey.currentState!.validate()) {
-      print("Signin Successful");
+}
 
-      print("Email: ${emailController.text}");
-      print("Password: ${passwordController.text}");
-    }
-  }
+
+  // Widget _socialIcon(IconData icon, Color color) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 10),
+  //     child: InkWell(
+  //       borderRadius: BorderRadius.circular(30),
+  //       onTap: () {},
+  //       child: CircleAvatar(
+  //         radius: 22,
+  //         backgroundColor: Colors.grey[200],
+  //         child: FaIcon(icon, color: color, size: 20),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   String? passwordErrorMessage;
   String? emailErrorMessage;
@@ -104,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Please enter your credentials',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         fontSize: 18,
                       ),
                     ),
@@ -158,14 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                    ),
                  ),
                 const SizedBox(height: 8),
-
-                    CustomButton(
-                      label: "Login",
-                      backgroundColor: Colors.grey,
+                CustomButton(label: "log in", 
+              backgroundColor: Colors.green,
                       textColor: Colors.black,
-                      onPressed: signUpUser,
-                    ),
-
+                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavigationScreen())),
+                ),
 
                 const SizedBox(height: 20),
                 Row(
