@@ -35,9 +35,20 @@ class _LoginScreenState extends State<LoginScreen> {
         color: color,
         size: 20,
       ),
+
+
     ),
   );
-}
+  }
+    void signUpUser() {
+    if (_formKey.currentState!.validate()) {
+      print("Signin Successful");
+
+      print("Email: ${emailController.text}");
+      print("Password: ${passwordController.text}");
+    }
+  }
+
   String? passwordErrorMessage;
   String? emailErrorMessage;
   
@@ -93,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Please enter your credentials',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.blueGrey,
+                        color: Colors.blue,
                         fontSize: 18,
                       ),
                     ),
@@ -147,11 +158,14 @@ class _LoginScreenState extends State<LoginScreen> {
                    ),
                  ),
                 const SizedBox(height: 8),
-                CustomButton(label: "log in", 
-              backgroundColor: Colors.green,
+
+                    CustomButton(
+                      label: "Login",
+                      backgroundColor: Colors.grey,
                       textColor: Colors.black,
-                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavigationScreen())),
-                ),
+                      onPressed: signUpUser,
+                    ),
+
 
                 const SizedBox(height: 20),
                 Row(
